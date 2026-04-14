@@ -7,32 +7,32 @@ export default function FrameworksSection() {
       id: "nist",
       name: "NIST Cybersecurity Framework",
       description:
-        "A comprehensive framework developed by the National Institute of Standards and Technology to improve cybersecurity risk management.",
+        "A practical framework for identifying risk, protecting systems, spotting trouble, responding well, and recovering without interpretive dance.",
       categories: [
         {
           name: "Identify",
           description:
-            "Develop organizational understanding to manage cybersecurity risk to systems, assets, data, and capabilities.",
+            "Figure out what you have before an attacker does you the courtesy of documenting it for you.",
         },
         {
           name: "Protect",
           description:
-            "Develop and implement appropriate safeguards to ensure delivery of critical infrastructure services.",
+            "Put controls in place so basic attacks bounce off instead of strolling through the lobby.",
         },
         {
           name: "Detect",
           description:
-            "Develop and implement appropriate activities to identify the occurrence of a cybersecurity event.",
+            "Notice suspicious behavior early, ideally before accounting starts asking about new bank details.",
         },
         {
           name: "Respond",
           description:
-            "Develop and implement appropriate activities to take action regarding a detected cybersecurity event.",
+            "Contain incidents with a plan more sophisticated than yelling into the group chat.",
         },
         {
           name: "Recover",
           description:
-            "Develop and implement appropriate activities to maintain plans for resilience and to restore any capabilities or services.",
+            "Restore systems, learn the lesson, and avoid becoming a conference cautionary tale.",
         },
       ],
     },
@@ -40,38 +40,38 @@ export default function FrameworksSection() {
       id: "iso27001",
       name: "ISO 27001",
       description:
-        "An international standard for information security management systems (ISMS) that provides a systematic approach to managing sensitive company information.",
+        "An information security management system for teams that need rigor, evidence, and fewer 'trust me, bro' processes.",
       categories: [
-        { name: "Risk Assessment", description: "Identify and evaluate information security risks." },
-        { name: "Security Policy", description: "Define organizational security policies and procedures." },
-        { name: "Asset Management", description: "Identify and manage information assets." },
-        { name: "Access Control", description: "Implement controls to restrict access to information and facilities." },
-        { name: "Cryptography", description: "Use encryption to protect sensitive information." },
+        { name: "Risk Assessment", description: "Work out what can go wrong before it does the presentation for you." },
+        { name: "Security Policy", description: "Set rules people can follow without requiring a legal translator." },
+        { name: "Asset Management", description: "Track important assets so the mystery server under Gary's desk stops being folklore." },
+        { name: "Access Control", description: "Give the right people access to the right things, then stop there." },
+        { name: "Cryptography", description: "Encrypt sensitive information so theft is less immediately useful." },
       ],
     },
     {
       id: "cis",
       name: "CIS Controls",
       description:
-        "A set of best practices for securing IT systems and data, developed by the Center for Internet Security.",
+        "Action-oriented safeguards for locking down common weaknesses before they become recurring calendar events.",
       categories: [
         {
           name: "Basic Controls",
-          description: "Fundamental controls that should be implemented in every organization.",
+          description: "Do the fundamentals first. Heroics are not a substitute for patching and asset inventory.",
         },
         {
           name: "Foundational Controls",
-          description: "Technical controls that provide clear security benefits and support the basic controls.",
+          description: "Technical protections with immediate defensive value and far less ceremony.",
         },
         {
           name: "Organizational Controls",
-          description: "Controls focused on people and processes to support the technical controls.",
+          description: "Process and accountability so security does not rely on one competent insomniac.",
         },
         {
           name: "Implementation Groups",
-          description: "Guidance for organizations of different sizes and capabilities.",
+          description: "Right-sized guidance for teams that are tiny, growing, or gloriously overextended.",
         },
-        { name: "Measurement & Metrics", description: "Methods to measure the effectiveness of security controls." },
+        { name: "Measurement & Metrics", description: "Proof that the controls work, not just that someone said they would." },
       ],
     },
   ]
@@ -83,7 +83,7 @@ export default function FrameworksSection() {
           <div className="space-y-2">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Security Frameworks</h2>
             <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl">
-              Our platform is built on industry-leading security frameworks to ensure comprehensive protection.
+              Standards you recognize, translated into work your team can finish before morale collapses.
             </p>
           </div>
         </div>
@@ -122,4 +122,3 @@ export default function FrameworksSection() {
     </section>
   )
 }
-

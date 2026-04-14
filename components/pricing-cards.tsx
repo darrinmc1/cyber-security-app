@@ -7,14 +7,14 @@ export default function PricingCards() {
   const pricingPlans = [
     {
       name: "Basic",
-      description: "Essential security features for small businesses",
+      description: "For small teams that would prefer not to be hacked on a budget",
       price: "$99",
       period: "per month",
       features: [
         "Vulnerability scanning",
-        "Basic security assessment",
+        "A security assessment with fewer buzzwords and more answers",
         "Email security",
-        "Security awareness training",
+        "Training people can survive awake",
         "24/7 monitoring",
       ],
       cta: "Get Started",
@@ -22,14 +22,14 @@ export default function PricingCards() {
     },
     {
       name: "Professional",
-      description: "Advanced security for growing organizations",
+      description: "For growing organizations that need control before the sprawl develops a personality",
       price: "$299",
       period: "per month",
       features: [
         "Everything in Basic",
         "Compliance management",
         "Advanced threat protection",
-        "Incident response planning",
+        "Incident response planning with less improvisation",
         "Risk assessment",
         "Dedicated security advisor",
       ],
@@ -38,7 +38,7 @@ export default function PricingCards() {
     },
     {
       name: "Enterprise",
-      description: "Comprehensive security for large organizations",
+      description: "For large organizations with serious complexity and a healthy fear of headlines",
       price: "Custom",
       period: "contact for pricing",
       features: [
@@ -60,7 +60,7 @@ export default function PricingCards() {
       {pricingPlans.map((plan, index) => (
         <Card key={index} className={`flex flex-col ${plan.popular ? "border-blue-500 shadow-lg" : ""}`}>
           {plan.popular && (
-            <div className="bg-blue-500 text-white text-center py-1 text-sm font-medium">Most Popular</div>
+            <div className="bg-blue-500 text-white text-center py-1 text-sm font-medium">Most Popular, for good reason</div>
           )}
           <CardHeader>
             <CardTitle>{plan.name}</CardTitle>
@@ -90,4 +90,3 @@ export default function PricingCards() {
     </div>
   )
 }
-

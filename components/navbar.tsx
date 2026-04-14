@@ -4,19 +4,9 @@ import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Shield } from "lucide-react"
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
+import { Shield, Menu } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu } from "lucide-react"
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -26,21 +16,9 @@ export default function Navbar() {
     { href: "/", label: "Home" },
     { href: "/frameworks", label: "Frameworks" },
     { href: "/get-started", label: "Get Started" },
+    { href: "/#pricing", label: "Pricing" },
     { href: "/dashboard", label: "Dashboard" },
     { href: "/contact", label: "Contact" },
-  ]
-
-  const frameworks = [
-    { href: "/frameworks/nist", label: "NIST Cybersecurity Framework" },
-    { href: "/frameworks/iso27001", label: "ISO 27001" },
-    { href: "/frameworks/cis", label: "CIS Controls" },
-  ]
-
-  const solutions = [
-    { href: "/solutions/assessment", label: "Security Assessment" },
-    { href: "/solutions/implementation", label: "Security Implementation" },
-    { href: "/solutions/training", label: "Security Training" },
-    { href: "/solutions/compliance", label: "Compliance Management" },
   ]
 
   return (
@@ -55,63 +33,20 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex md:gap-10">
-          <NavigationMenu>
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <Link href="/" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>Home</NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger>Frameworks</NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                    {frameworks.map((framework) => (
-                      <li key={framework.href}>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={framework.href}
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                          >
-                            <div className="text-sm font-medium leading-none">{framework.label}</div>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger>Solutions</NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                    {solutions.map((solution) => (
-                      <li key={solution.href}>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={solution.href}
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                          >
-                            <div className="text-sm font-medium leading-none">{solution.label}</div>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link href="/get-started" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>Get Started</NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link href="/contact" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>Contact</NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
+          <nav className="flex items-center gap-6 text-sm font-medium">
+            {routes.map((route) => (
+              <Link
+                key={route.href}
+                href={route.href}
+                className={cn(
+                  "transition-colors hover:text-blue-600",
+                  pathname === route.href && "text-blue-600",
+                )}
+              >
+                {route.label}
+              </Link>
+            ))}
+          </nav>
         </div>
 
         <div className="hidden md:flex gap-4">
@@ -165,4 +100,3 @@ export default function Navbar() {
     </header>
   )
 }
-

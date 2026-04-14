@@ -6,45 +6,132 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Progress } from "@/components/ui/progress"
 import { Button } from "@/components/ui/button"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Shield, AlertTriangle, CheckCircle, Clock, AlertCircle } from "lucide-react"
+import { Shield, AlertTriangle, CheckCircle, Clock, AlertCircle, BadgeCheck, ShieldOff } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
+
+type Severity = "HIGH" | "MEDIUM" | "LOW"
+
+type UserData = {
+  name: string
+  email: string
+  company: {
+    name: string
+    plan: string
+  }
+  securityScore: number
+}
+
+type ComplianceScores = {
+  nist: {
+    score: number
+    categories: {
+      identify: number
+      protect: number
+      detect: number
+      respond: number
+      recover: number
+    }
+  }
+  iso: {
+    score: number
+    categories: {
+      riskAssessment: number
+      securityPolicy: number
+      assetManagement: number
+      accessControl: number
+      cryptography: number
+    }
+  }
+  cis: {
+    score: number
+    categories: {
+      basicControls: number
+      foundationalControls: number
+      organizationalControls: number
+    }
+  }
+}
+
+type SecurityAlert = {
+  id: string
+  title: string
+  description: string
+  severity: Severity
+  createdAt: string
+}
+
+type PendingTask = {
+  id: string
+  title: string
+  description: string
+  progress: number
+  dueDate: Date
+}
+
+type MetricCallout = {
+  label: string
+  value: string
+  note: string
+  icon: typeof Shield
+}
+
+const complianceScores: ComplianceScores = {
+  nist: {
+    score: 65,
+    categories: {
+      identify: 70,
+      protect: 65,
+      detect: 60,
+      respond: 55,
+      recover: 50,
+    },
+  },
+  iso: {
+    score: 72,
+    categories: {
+      riskAssessment: 75,
+      securityPolicy: 80,
+      assetManagement: 65,
+      accessControl: 70,
+      cryptography: 60,
+    },
+  },
+  cis: {
+    score: 68,
+    categories: {
+      basicControls: 75,
+      foundationalControls: 65,
+      organizationalControls: 60,
+    },
+  },
+}
+
+const metricCallouts: MetricCallout[] = [
+  {
+    label: "Phishing resilience",
+    value: "84%",
+    note: "A respectable number, though one person still nearly trusted a fake invoice written in comic sans.",
+    icon: BadgeCheck,
+  },
+  {
+    label: "Patch latency",
+    value: "6 days",
+    note: "Not bad. Not excellent. Definitely better than 'we patch when Kevin remembers.'",
+    icon: Shield,
+  },
+  {
+    label: "Risky exceptions",
+    value: "3",
+    note: "Three active exceptions remain, which is still low enough to discuss without sighing heavily.",
+    icon: ShieldOff,
+  },
+]
 
 export default function Dashboard() {
   const { toast } = useToast()
   const [loading, setLoading] = useState(true)
-  const [userData, setUserData] = useState(null)
-  const [complianceScores, setComplianceScores] = useState({
-    nist: {
-      score: 65,
-      categories: {
-        identify: 70,
-        protect: 65,
-        detect: 60,
-        respond: 55,
-        recover: 50,
-      },
-    },
-    iso: {
-      score: 72,
-      categories: {
-        riskAssessment: 75,
-        securityPolicy: 80,
-        assetManagement: 65,
-        accessControl: 70,
-        cryptography: 60,
-      },
-    },
-    cis: {
-      score: 68,
-      categories: {
-        basicControls: 75,
-        foundationalControls: 65,
-        organizationalControls: 60,
-      },
-    },
-  })
-
-  const [securityAlerts, setSecurityAlerts] = useState([
+  const [userData, setUserData] = useState<UserData | null>(null)
+  const [securityAlerts] = useState<SecurityAlert[]>([
     {
       id: "1",
       title: "Unusual Login Activity",
@@ -68,7 +155,7 @@ export default function Dashboard() {
     },
   ])
 
-  const [pendingTasks, setPendingTasks] = useState([
+  const [pendingTasks] = useState<PendingTask[]>([
     {
       id: "1",
       title: "Complete Security Assessment",
@@ -87,7 +174,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     // Simulate loading data
-    setTimeout(() => {
+    const timeoutId = window.setTimeout(() => {
       setUserData({
         name: "John Doe",
         email: "john@example.com",
@@ -99,9 +186,11 @@ export default function Dashboard() {
       })
       setLoading(false)
     }, 1000)
+
+    return () => window.clearTimeout(timeoutId)
   }, [])
 
-  const getSeverityColor = (severity) => {
+  const getSeverityColor = (severity: Severity) => {
     switch (severity) {
       case "HIGH":
         return "bg-red-100 text-red-800 border-red-200"
@@ -114,7 +203,7 @@ export default function Dashboard() {
     }
   }
 
-  const getSeverityIcon = (severity) => {
+  const getSeverityIcon = (severity: Severity) => {
     switch (severity) {
       case "HIGH":
         return <AlertCircle className="h-5 w-5 text-red-600" />
@@ -125,6 +214,34 @@ export default function Dashboard() {
       default:
         return <AlertCircle className="h-5 w-5 text-gray-600" />
     }
+  }
+
+  const handleGenerateReport = () => {
+    toast({
+      title: "Report queued",
+      description: "We told the dashboard to make a neat little report instead of another dramatic PDF monster.",
+    })
+  }
+
+  const handleViewAlert = (alert: SecurityAlert) => {
+    toast({
+      title: alert.title,
+      description: `${alert.severity} priority. ${alert.description}`,
+    })
+  }
+
+  const handleViewAllAlerts = () => {
+    toast({
+      title: "Alert center",
+      description: `There are ${securityAlerts.length} alerts in the queue, which is manageable and still fewer than most inboxes.`,
+    })
+  }
+
+  const handleViewFramework = (frameworkName: string) => {
+    toast({
+      title: `${frameworkName} details`,
+      description: "Detailed drill-down coming next. The button now does more than provide emotional support.",
+    })
   }
 
   if (loading) {
@@ -143,10 +260,12 @@ export default function Dashboard() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
         <div>
           <h1 className="text-3xl font-bold">Security Dashboard</h1>
-          <p className="text-gray-500">Monitor and manage your organization's security posture</p>
+          <p className="text-gray-500">
+            Monitor your organization&apos;s security posture without pretending chaos is a management framework.
+          </p>
         </div>
         <div className="mt-4 md:mt-0">
-          <Button>Generate Report</Button>
+          <Button onClick={handleGenerateReport}>Generate Report</Button>
         </div>
       </div>
 
@@ -243,7 +362,7 @@ export default function Dashboard() {
                     </div>
                   </div>
                   <div className="mt-4 text-right">
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" onClick={() => handleViewFramework("NIST CSF")}>
                       View Details
                     </Button>
                   </div>
@@ -287,7 +406,7 @@ export default function Dashboard() {
                     </div>
                   </div>
                   <div className="mt-4 text-right">
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" onClick={() => handleViewFramework("ISO 27001")}>
                       View Details
                     </Button>
                   </div>
@@ -321,7 +440,7 @@ export default function Dashboard() {
                     </div>
                   </div>
                   <div className="mt-4 text-right">
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" onClick={() => handleViewFramework("CIS Controls")}>
                       View Details
                     </Button>
                   </div>
@@ -351,7 +470,12 @@ export default function Dashboard() {
                               <Clock className="h-3 w-3 mr-1" />
                               {new Date(alert.createdAt).toLocaleString()}
                             </span>
-                            <Button variant="outline" size="sm" className="h-6 text-xs">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="h-6 text-xs"
+                              onClick={() => handleViewAlert(alert)}
+                            >
                               View
                             </Button>
                           </div>
@@ -363,7 +487,7 @@ export default function Dashboard() {
                   <div className="text-center py-4 text-gray-500">No active alerts</div>
                 )}
                 <div className="text-center mt-2">
-                  <Button variant="link" size="sm">
+                  <Button variant="link" size="sm" onClick={handleViewAllAlerts}>
                     View All Alerts
                   </Button>
                 </div>
@@ -372,7 +496,59 @@ export default function Dashboard() {
           </Card>
         </div>
       </div>
+
+      <div className="grid grid-cols-1 gap-8 xl:grid-cols-[1.1fr_0.9fr]">
+        <Card>
+          <CardHeader>
+            <CardTitle>Pending Tasks</CardTitle>
+            <CardDescription>Work that still needs doing, because security is rude like that.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {pendingTasks.map((task) => (
+                <div key={task.id} className="rounded-lg border p-4">
+                  <div className="mb-2 flex flex-col justify-between gap-2 md:flex-row md:items-center">
+                    <div>
+                      <h3 className="font-semibold">{task.title}</h3>
+                      <p className="text-sm text-gray-500">{task.description}</p>
+                    </div>
+                    <span className="text-sm text-gray-500">Due {task.dueDate.toLocaleDateString()}</span>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <Progress value={task.progress} className="h-2" />
+                    <span className="min-w-12 text-sm font-medium">{task.progress}%</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Team Readiness Notes</CardTitle>
+            <CardDescription>Short version: progress is real, perfection remains fictional.</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {metricCallouts.map(({ label, value, note, icon: Icon }) => (
+              <div key={label} className="rounded-lg border p-4">
+                <div className="mb-2 flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100">
+                      <Icon className="h-5 w-5 text-blue-700" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">{label}</h3>
+                      <p className="text-sm font-medium text-slate-900">{value}</p>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-sm leading-6 text-slate-600">{note}</p>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }
-

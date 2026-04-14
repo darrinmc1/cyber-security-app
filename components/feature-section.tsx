@@ -4,33 +4,33 @@ export default function FeatureSection() {
   const features = [
     {
       icon: <Shield className="h-10 w-10 text-blue-600" />,
-      title: "Comprehensive Protection",
-      description: "Multi-layered security approach to protect your organization from various cyber threats.",
+      title: "Protection That Covers More Than Hope",
+      description: "Layered defenses for endpoints, identities, and infrastructure, because positive thinking is not a control.",
     },
     {
       icon: <Lock className="h-10 w-10 text-blue-600" />,
-      title: "Framework Compliance",
-      description: "Align with industry-standard frameworks like NIST, ISO 27001, CIS, and more.",
+      title: "Compliance Without the Ritual Suffering",
+      description: "Map your work to NIST, ISO 27001, and CIS without sacrificing a quarter to formatting evidence.",
     },
     {
       icon: <Database className="h-10 w-10 text-blue-600" />,
       title: "Data Security",
-      description: "Protect sensitive data with advanced encryption and access controls.",
+      description: "Lock down sensitive data with encryption, permissions, and the radical concept of knowing where it lives.",
     },
     {
       icon: <Server className="h-10 w-10 text-blue-600" />,
       title: "Infrastructure Security",
-      description: "Secure your network infrastructure against unauthorized access and attacks.",
+      description: "Harden the stack before a mystery port and a stale VM become the stars of your next incident review.",
     },
     {
       icon: <Users className="h-10 w-10 text-blue-600" />,
-      title: "Security Training",
-      description: "Educate your team on security best practices and threat awareness.",
+      title: "Training People Genuinely Remember",
+      description: "Awareness programs that teach safer behavior without subjecting everyone to lifeless compliance theater.",
     },
     {
       icon: <CheckCircle className="h-10 w-10 text-blue-600" />,
-      title: "Compliance Reporting",
-      description: "Generate detailed reports to demonstrate compliance with regulatory requirements.",
+      title: "Reporting Executives Might Actually Read",
+      description: "Turn technical progress into clear reports that make sense to leadership, auditors, and tired humans.",
     },
   ]
 
@@ -41,7 +41,7 @@ export default function FeatureSection() {
           <div className="space-y-2">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Key Features</h2>
             <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl">
-              Our platform offers comprehensive security solutions to protect your organization.
+              Useful controls, practical workflows, and none of the empty “military-grade” chest beating.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
@@ -61,4 +61,3 @@ export default function FeatureSection() {
     </section>
   )
 }
-
