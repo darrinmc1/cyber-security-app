@@ -1,8 +1,10 @@
 "use client"
 
 import { useState } from "react"
+import { usePathname } from "next/navigation"
 
 export function FeedbackWidget() {
+  const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [rating, setRating] = useState(0)
   const [hoveredRating, setHoveredRating] = useState(0)
@@ -55,6 +57,8 @@ export function FeedbackWidget() {
       setResponseMessage("Network handshake failed. Try again — the firewall is the usual suspect.")
     }
   }
+
+  if (pathname === "/") return null
 
   return (
     <div className="fixed bottom-6 right-6 z-50">

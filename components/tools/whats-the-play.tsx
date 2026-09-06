@@ -24,15 +24,10 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
 import { ABC_METHOD, WALKTHROUGH_DISCLAIMER } from "@/lib/disclaimer"
-import type { WalkthroughResult } from "@/lib/archive"
+import { PLAY_EXAMPLE, type WalkthroughResult } from "@/lib/archive"
 
 const FREE_USE_KEY = "abccyber_play_uses"
-const EXAMPLE = `From: IT Support <it-help@secure-update-g43f.top>
-Subject: Action Required: Your Email Password Will Expire Today
-
-Dear Valued User,
-Your Microsoft 365 password expires in 3 hours. Click here to keep access: http://fake-login-page.xyz/
-Failure to update will result in account termination.`
+const EXAMPLE = PLAY_EXAMPLE
 
 type WalkthroughResponse = WalkthroughResult & {
   aiAvailable?: boolean

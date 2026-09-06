@@ -36,6 +36,14 @@ export interface WalkthroughResult {
   methodName: string
 }
 
+/** Same scenario the What's the play paste-tool ships with. Hero still uses this, not invented B-roll. */
+export const PLAY_EXAMPLE = `From: IT Support <it-help@secure-update-g43f.top>
+Subject: Action Required: Your Email Password Will Expire Today
+
+Dear Valued User,
+Your Microsoft 365 password expires in 3 hours. Click here to keep access: http://fake-login-page.xyz/
+Failure to update will result in account termination.`
+
 export const ARCHIVE_CITATIONS: ArchiveCitation[] = [
   {
     id: "phishing-awareness",

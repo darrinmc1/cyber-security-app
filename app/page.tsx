@@ -7,6 +7,10 @@ import FrameworksSection from "@/components/frameworks-section"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import WhatsNew from "@/components/whats-new"
 import { JsonLd } from "@/components/json-ld"
+import HomeHero from "@/components/home-hero"
+import HomeScrollStage from "@/components/home-scroll-stage"
+import HomeLessonRail from "@/components/home-lesson-rail"
+import HomeWhatYouGet from "@/components/home-what-you-get"
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -14,7 +18,7 @@ const organizationSchema = {
   name: "ABC of Cyber",
   url: "https://abcofcyber.com",
   description:
-    "Cybersecurity training and platform for teams — practical controls, compliance mapping across NIST, ISO 27001, and CIS, and security awareness training without the scare tactics.",
+    "A written cyber awareness course. Phishing lessons start with the invoice PDF you should not open.",
 }
 
 const websiteSchema = {
@@ -69,44 +73,13 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <JsonLd data={organizationSchema} />
       <JsonLd data={websiteSchema} />
-      {/* Hero Section */}
-      <section className="w-full bg-gradient-to-r from-slate-950 via-blue-950 to-slate-900 relative overflow-hidden py-12 text-white md:py-24 lg:py-32">
-        <div className="absolute inset-0 bg-[url('/images/hero-abcsofcyber.jpg')] bg-cover bg-center opacity-25" aria-hidden="true" />
-        <div className="relative z-10 container px-4 md:px-6 mx-auto">
-          <div className="flex flex-col items-center space-y-6 text-center">
-            <div className="space-y-3">
-              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-blue-200">
-                Cyber security for teams allergic to nonsense
-              </p>
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
-                Cybersecurity Training
-              </h1>
-              <p className="mx-auto max-w-[760px] text-blue-100 md:text-xl">
-                Serious protection. Slightly unhinged copy. Very little panic.
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button asChild size="lg" className="bg-white text-slate-950 hover:bg-blue-100">
-                <Link href="/learn">Start Learning</Link>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="border-blue-200 bg-transparent text-white hover:bg-white/10"
-              >
-                <Link href="#pricing">See pricing</Link>
-              </Button>
-            </div>
-            <p className="max-w-[680px] text-sm text-blue-200">
-              Built for security leads, compliance teams, and the one exhausted admin who keeps everything from
-              catching fire.
-            </p>
-          </div>
-        </div>
-      </section>
+      <HomeScrollStage>
+        <HomeHero />
+        <HomeLessonRail />
+        <HomeWhatYouGet />
+      </HomeScrollStage>
 
-      {/* Product outcome first — What's New sits below the fold */}
+      {/* Below the fold — existing homepage. Pricing untouched. */}
       <FeatureSection />
 
       <section className="w-full border-y bg-slate-50 py-12 md:py-16">

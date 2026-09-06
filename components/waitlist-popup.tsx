@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
 import {
     Dialog,
     DialogContent,
@@ -19,6 +20,7 @@ const SHOW_AFTER_MS = 5000
 const SUPPRESS_DAYS = 30
 
 export function WaitlistPopup() {
+    const pathname = usePathname()
     const [isOpen, setIsOpen] = useState(false)
     const [email, setEmail] = useState("")
     const [honeypot, setHoneypot] = useState("")
@@ -26,6 +28,11 @@ export function WaitlistPopup() {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
+        if (pathname === "/") {
+            setIsOpen(false)
+            return
+        }
+
         const lastSeen = localStorage.getItem(POPUP_STORAGE_KEY)
         if (lastSeen) {
             const daysSince =
@@ -38,7 +45,7 @@ export function WaitlistPopup() {
         }, SHOW_AFTER_MS)
 
         return () => clearTimeout(timer)
-    }, [])
+    }, [pathname])
 
     const markSeen = () => {
         localStorage.setItem(POPUP_STORAGE_KEY, Date.now().toString())
@@ -84,6 +91,8 @@ export function WaitlistPopup() {
             setLoading(false)
         }
     }
+
+    if (pathname === "/") return null
 
     return (
         <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>
