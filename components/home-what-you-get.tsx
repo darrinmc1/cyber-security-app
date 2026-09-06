@@ -6,7 +6,7 @@ const items = [
   {
     n: "01",
     title: "Written lessons you can finish at a desk",
-    body: "Start with Phishing Awareness. Fifteen minutes. Free to read. This page does not watch anyone's inbox.",
+    body: "Start with Phishing Awareness. Fifteen minutes. Free to read. Same lesson as the still on the fold.",
   },
   {
     n: "02",
@@ -21,7 +21,7 @@ const items = [
   {
     n: "04",
     title: "What this is not",
-    body: "Checkout is not live. There are no fake testimonials on this page. Nothing auto-opens a modal while you read.",
+    body: "Checkout is not live. The waitlist is a link, not a popup on this page.",
   },
 ] as const
 
@@ -32,15 +32,15 @@ export default function HomeWhatYouGet() {
         <div className="lg:sticky lg:top-24 lg:self-start">
           <p className="text-sm font-semibold text-sky-400">What you get</p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-white md:text-5xl">
-            A written course, not a scare campaign.
+            Fifteen minutes on the invoice you leave closed.
           </h2>
           <p className="mt-4 max-w-md text-base leading-7 text-slate-400">
-            Lessons plus a paste-the-scenario walkthrough. That is the product. The rest of the site is still
-            below if you want frameworks or the waitlist.
+            Phishing Awareness is free and written. What&apos;s the play is the paste-the-scenario walkthrough.
+            Frameworks and the waitlist are still below.
           </p>
           {getHumorEnabled() ? (
             <p className="mt-4 max-w-md text-sm leading-6 text-slate-500">
-              If the invoice is for toner you did not order, the lesson is the click you skip.
+              If you did not order the toner, skip the PDF. That skip is the lesson.
             </p>
           ) : null}
         </div>

@@ -4,6 +4,11 @@ import HomeReveal from "@/components/home-reveal"
 
 const RAIL_SLUGS = ["phishing-awareness", "password-security"] as const
 
+const FOLD_BLURB: Partial<Record<(typeof RAIL_SLUGS)[number], string>> = {
+  "phishing-awareness":
+    "Invoice PDFs, fake IT resets, links you should not follow. Same 15-minute lesson as the still above.",
+}
+
 export default function HomeLessonRail() {
   const cards = RAIL_SLUGS.map((slug) => lessons.find((lesson) => lesson.slug === slug)).filter(
     (lesson): lesson is (typeof lessons)[number] => Boolean(lesson),
@@ -27,7 +32,7 @@ export default function HomeLessonRail() {
                 {lesson.title}
               </h2>
               <p className="mt-3 max-w-xl text-sm leading-6 text-slate-400 md:text-base">
-                {lesson.summary}
+                {FOLD_BLURB[lesson.slug as (typeof RAIL_SLUGS)[number]] ?? lesson.summary}
               </p>
               <p className="mt-6 text-sm font-medium text-blue-300 group-hover:text-blue-200">
                 Open the lesson

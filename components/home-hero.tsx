@@ -43,7 +43,7 @@ const primer = [
   {
     letter: ABC_METHOD.steps[2].letter,
     phrase: "Click",
-    rest: "the only move they need. Choose not to.",
+    rest: "the only move they need. Leave the file closed.",
   },
 ] as const
 
@@ -157,13 +157,14 @@ export default function HomeHero() {
       <div className="container mx-auto grid w-full flex-1 grid-cols-1 items-center gap-10 px-4 py-12 md:px-6 md:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
         <div className="max-w-xl space-y-5 text-left">
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-sky-400">
-            Written awareness course
+            Phishing lesson first
           </p>
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-[3.4rem] lg:leading-[1.08]">
             Stop clicking the invoice PDF from a stranger.
           </h1>
           <p className="text-slate-300 md:text-xl">
-            Here is the alphabet of how that scam works. You read the lesson. This page does not watch anyone&apos;s inbox.
+            That file is named invoice. The sender is not accounts. The lesson is the three checks you run before you
+            open it.
           </p>
           {getHumorEnabled() ? (
             <p className="text-sm leading-6 text-slate-400">
@@ -180,7 +181,7 @@ export default function HomeHero() {
               size="lg"
               className="rounded-full bg-blue-600 px-7 text-white hover:bg-blue-500"
             >
-              <Link href={FIRST_LESSON_HREF}>Start free written lesson</Link>
+              <Link href={FIRST_LESSON_HREF}>Open the phishing lesson</Link>
             </Button>
             <Button
               asChild
@@ -188,7 +189,7 @@ export default function HomeHero() {
               size="lg"
               className="rounded-full border-white/20 bg-transparent text-white hover:bg-white/10"
             >
-              <Link href={TOPICS_HREF}>Browse topics</Link>
+              <Link href={TOPICS_HREF}>See the other lessons</Link>
             </Button>
             <Button asChild variant="ghost" size="lg" className="text-slate-300 hover:bg-white/10 hover:text-white">
               <Link href={WAITLIST_HREF}>Join the waitlist</Link>
