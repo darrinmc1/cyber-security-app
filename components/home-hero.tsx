@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowLeft, MailWarning } from "lucide-react"
+import { ArrowLeft, FileText, MailWarning } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { lessons } from "@/lib/lessons"
@@ -58,10 +58,44 @@ const beginnerPeek = [
     start: lesson.slug === "phishing-awareness",
   }))
 
-function HeroProductStill() {
+function PrimerStillChips() {
+  return (
+    <div className="home-still-primer-chips" aria-hidden="true">
+      {primer.map((item) => (
+        <span key={item.letter} className="home-primer-chip">
+          <span className="home-primer-chip-letter">{item.letter}</span>
+          {item.phrase}
+        </span>
+      ))}
+    </div>
+  )
+}
+
+function InvoicePdfCard({ humor }: { humor: boolean }) {
+  return (
+    <div className="home-invoice-stage" aria-hidden="true">
+      <div className="home-invoice-card rounded-xl border border-slate-200 bg-white p-3 text-left shadow-lg">
+        <div className="flex items-center gap-2">
+          <span className="rounded-md bg-red-100 p-1.5">
+            <FileText className="h-4 w-4 text-red-700" />
+          </span>
+          <div>
+            <p className="text-xs font-semibold text-slate-900">invoice.pdf</p>
+            <p className="text-[11px] leading-4 text-slate-500">Unrequested attachment</p>
+          </div>
+        </div>
+        <p className="mt-2 text-[11px] leading-4 text-slate-600">From a stranger. No amount on the file. Leave it closed.</p>
+        {humor ? <p className="mt-1.5 text-[11px] leading-4 text-slate-500">The toner can wait. Or forever.</p> : null}
+      </div>
+    </div>
+  )
+}
+
+function HeroProductStill({ humor }: { humor: boolean }) {
   return (
     <div className="home-still-frame home-primer-still-clip relative h-[22rem] overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 md:h-[26rem]">
-      <div className="home-primer-still-pan origin-top-left" aria-hidden="true">
+      <PrimerStillChips />
+      <div className="origin-top-left" aria-hidden="true">
         <div className="w-[36rem] bg-white text-left md:w-[40rem]">
           <div className="border-b bg-slate-50 px-6 py-5">
             <p className="mb-4 inline-flex items-center text-sm text-slate-600">
@@ -106,6 +140,7 @@ function HeroProductStill() {
           </div>
         </div>
       </div>
+      <InvoicePdfCard humor={humor} />
     </div>
   )
 }
@@ -135,14 +170,14 @@ function BeginnerTrackPeek() {
   )
 }
 
-function HeroProductStack() {
+function HeroProductStack({ humor }: { humor: boolean }) {
   return (
     <div className="home-product-stack relative">
       <div className="pointer-events-none absolute -right-4 top-10 hidden w-[72%] lg:block" aria-hidden="true">
         <BeginnerTrackPeek />
       </div>
       <div className="relative z-10 lg:mr-8">
-        <HeroProductStill />
+        <HeroProductStill humor={humor} />
       </div>
     </div>
   )
@@ -151,6 +186,7 @@ function HeroProductStack() {
 export default function HomeHero() {
   const lessonCount = lessons.length
   const beginnerCount = lessons.filter((lesson) => lesson.difficulty === "Beginner").length
+  const humor = getHumorEnabled()
 
   return (
     <section className="home-primer-hero flex min-h-[calc(100svh-4rem)] flex-col text-white">
@@ -165,7 +201,7 @@ export default function HomeHero() {
           <p className="text-slate-300 md:text-xl">
             Here is the alphabet of how that scam works. You read the lesson. This page does not watch anyone&apos;s inbox.
           </p>
-          {getHumorEnabled() ? (
+          {humor ? (
             <p className="text-sm leading-6 text-slate-400">
               If you did not order the toner, the toner invoice can wait. Or forever.
             </p>
@@ -196,15 +232,15 @@ export default function HomeHero() {
           </div>
         </div>
 
-        <HeroProductStack />
+        <HeroProductStack humor={humor} />
       </div>
 
       <div className="border-t border-white/10 bg-black/20 backdrop-blur-sm">
-        <div className="container mx-auto flex flex-col px-4 md:flex-row md:px-6">
+        <div className="home-primer-strip container mx-auto px-4 md:px-6">
           {primer.map((item, index) => (
             <p
               key={item.letter}
-              className={`flex-1 py-5 text-left text-sm leading-6 text-slate-300 md:py-6 ${
+              className={`home-primer-strip-chip flex-1 py-5 text-left text-sm leading-6 text-slate-300 md:py-6 ${
                 index > 0 ? "border-t border-white/10 md:border-l md:border-t-0 md:pl-6" : ""
               } ${index < primer.length - 1 ? "md:pr-6" : ""}`}
             >
