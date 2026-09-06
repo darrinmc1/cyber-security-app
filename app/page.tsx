@@ -18,7 +18,7 @@ const organizationSchema = {
   name: "ABC of Cyber",
   url: "https://abcofcyber.com",
   description:
-    "A written course that starts with the invoice PDF you should not open.",
+    "A written cyber awareness course. Phishing lessons start with the invoice PDF you should not open.",
 }
 
 const websiteSchema = {

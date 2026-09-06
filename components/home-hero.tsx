@@ -157,14 +157,13 @@ export default function HomeHero() {
       <div className="container mx-auto grid w-full flex-1 grid-cols-1 items-center gap-10 px-4 py-12 md:px-6 md:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
         <div className="max-w-xl space-y-5 text-left">
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-sky-400">
-            Phishing lesson first
+            Written cyber awareness course
           </p>
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-[3.4rem] lg:leading-[1.08]">
             Stop clicking the invoice PDF from a stranger.
           </h1>
           <p className="text-slate-300 md:text-xl">
-            That file is named invoice. The sender is not accounts. The lesson is the three checks you run before you
-            open it.
+            Phishing lessons you read. Start with the three checks before you open that invoice.
           </p>
           {getHumorEnabled() ? (
             <p className="text-sm leading-6 text-slate-400">
@@ -172,7 +171,7 @@ export default function HomeHero() {
             </p>
           ) : null}
           <p className="text-sm text-slate-400">
-            {lessonCount} written lessons on this site. {beginnerCount} marked beginner. Free to read. Checkout is not
+            A written course: {lessonCount} lessons on this site. {beginnerCount} marked beginner. Checkout is not
             live.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
